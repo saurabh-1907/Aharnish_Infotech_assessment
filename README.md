@@ -1,5 +1,6 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
-![Basic implementation of Calculation logic and Schedule table](image.png)
+![Basic implementation of Calculation logic and Schedule table added navbar](image1.png)
+![Basic implementation of Calculation logic and Schedule table added footer](image2.png)
 ## Getting Started
 
 First, run the development server:
