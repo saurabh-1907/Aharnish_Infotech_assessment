@@ -3,7 +3,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { TextField, Typography, Container, Box, Button, Grid, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material';
+import { TextField, Typography, Container, Box, Button, Grid, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Divider } from '@mui/material';
 import { calculateMonthlyPayment, calculateLoanSummary, calculateAmortizationSchedule } from '../utils/calculations';
 
 interface LoanSummary {
@@ -12,7 +12,6 @@ interface LoanSummary {
   totalPayment: number;
   payoffDate: string;
 }
-
 
 export interface AmortizationRow {
   paymentDate: string;
@@ -43,14 +42,18 @@ export default function LoanCalculatorForm() {
   }, [loanAmount, interestRate, loanTerm, startDate]);
 
   return (
-    <Container maxWidth="md" sx={{ mt: 4 }}>
-      
+    <Container maxWidth="md" sx={{ mt: 4, mb: 6, bgcolor: '#f4f6f8', p: 4, borderRadius: 3 }}>
+      <Typography variant="h5" align="center" gutterBottom sx={{ fontWeight: 'bold', color: '#333' }}>
+        Personal Loan Calculator
+      </Typography>
+      <Divider sx={{ mb: 3 }} />
+
       <Grid container spacing={4}>
         {/* Loan Details Section */}
         <Grid item xs={12} md={4}>
-          <Box component="form" noValidate autoComplete="off" sx={{ bgcolor: '#f9f9f9', p: 3, borderRadius: 2 }}>
-            <Typography variant="h6" gutterBottom>
-              Loan details
+          <Box component="form" noValidate autoComplete="off" sx={{ bgcolor: '#ffffff', p: 3, borderRadius: 2, boxShadow: 2 }}>
+            <Typography variant="h6" gutterBottom sx={{ color: '#1976d2' }}>
+              Loan Details
             </Typography>
             <TextField
               label="Loan Amount"
@@ -89,21 +92,21 @@ export default function LoanCalculatorForm() {
 
         {/* Loan Estimate Section */}
         <Grid item xs={12} md={8}>
-          <Box sx={{ p: 3, bgcolor: '#fff', borderRadius: 2, boxShadow: 1 }}>
-            <Typography variant="h6" gutterBottom>
-              Your loan estimate
+          <Box sx={{ p: 3, bgcolor: '#ffffff', borderRadius: 2, boxShadow: 2 }}>
+            <Typography variant="h6" gutterBottom sx={{ color: '#1976d2' }}>
+              Your Loan Estimate
             </Typography>
             {monthlyPayment !== null && (
-              <Typography variant="h4" color="green" sx={{ mb: 2 }}>
-                Monthly payment: ${monthlyPayment.toFixed(2)}
+              <Typography variant="h4" color="green" sx={{ mb: 2, fontWeight: 'bold' }}>
+                Monthly Payment: ${monthlyPayment.toFixed(2)}
               </Typography>
             )}
             {loanSummary && (
-              <Box>
-                <Typography>Total Principal: ${loanSummary.totalPrincipal.toFixed(2)}</Typography>
-                <Typography>Total Interest Payments: ${loanSummary.totalInterest.toFixed(2)}</Typography>
-                <Typography>Total Loan Payments: ${loanSummary.totalPayment.toFixed(2)}</Typography>
-                <Typography>Payoff Date: {loanSummary.payoffDate}</Typography>
+              <Box sx={{ mb: 3 }}>
+                <Typography variant="body1" color="textSecondary">Total Principal: ${loanSummary.totalPrincipal.toFixed(2)}</Typography>
+                <Typography variant="body1" color="textSecondary">Total Interest Payments: ${loanSummary.totalInterest.toFixed(2)}</Typography>
+                <Typography variant="body1" color="textSecondary">Total Loan Payments: ${loanSummary.totalPayment.toFixed(2)}</Typography>
+                <Typography variant="body1" color="textSecondary">Payoff Date: {loanSummary.payoffDate}</Typography>
               </Box>
             )}
 
@@ -115,13 +118,13 @@ export default function LoanCalculatorForm() {
                 </Typography>
                 <TableContainer component={Paper}>
                   <Table>
-                    <TableHead>
+                    <TableHead sx={{ bgcolor: '#1976d2' }}>
                       <TableRow>
-                        <TableCell>Payment Date</TableCell>
-                        <TableCell>Principal</TableCell>
-                        <TableCell>Interest</TableCell>
-                        <TableCell>Monthly Total</TableCell>
-                        <TableCell>Balance</TableCell>
+                        <TableCell sx={{ color: '#fff', fontWeight: 'bold' }}>Payment Date</TableCell>
+                        <TableCell sx={{ color: '#fff', fontWeight: 'bold' }}>Principal</TableCell>
+                        <TableCell sx={{ color: '#fff', fontWeight: 'bold' }}>Interest</TableCell>
+                        <TableCell sx={{ color: '#fff', fontWeight: 'bold' }}>Monthly Total</TableCell>
+                        <TableCell sx={{ color: '#fff', fontWeight: 'bold' }}>Balance</TableCell>
                       </TableRow>
                     </TableHead>
                     <TableBody>
