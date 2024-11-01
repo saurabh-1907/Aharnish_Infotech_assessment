@@ -1,5 +1,9 @@
+// app/layout.tsx
+
 import React from 'react';
 import { CssBaseline, Container } from '@mui/material';
+import Navbar from '../src/components/Navbar';
+import Footer from '../src/components/Footer';
 import '../src/styles/globals.css';
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -11,9 +15,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body>
         <CssBaseline />
+        <Navbar />
         <Container maxWidth="md">
           {children}
         </Container>
+        <Footer />
       </body>
     </html>
   );

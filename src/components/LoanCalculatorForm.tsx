@@ -1,9 +1,9 @@
-// LoanCalculatorForm.tsx
+// src/components/LoanCalculatorForm.tsx
 
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { TextField, Typography, Container, Box, Button, Grid, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Divider } from '@mui/material';
+import { TextField, Typography, Container, Box, Grid, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material';
 import { calculateMonthlyPayment, calculateLoanSummary, calculateAmortizationSchedule } from '../utils/calculations';
 
 interface LoanSummary {
@@ -42,75 +42,39 @@ export default function LoanCalculatorForm() {
   }, [loanAmount, interestRate, loanTerm, startDate]);
 
   return (
-    <Container maxWidth="md" sx={{ mt: 4, mb: 6, bgcolor: '#f4f6f8', p: 4, borderRadius: 3 }}>
-      <Typography variant="h5" align="center" gutterBottom sx={{ fontWeight: 'bold', color: '#333' }}>
-        Personal Loan Calculator
-      </Typography>
-      <Divider sx={{ mb: 3 }} />
-
+    <Container maxWidth="md" sx={{ mt: 4 }}>
       <Grid container spacing={4}>
-        {/* Loan Details Section */}
         <Grid item xs={12} md={4}>
-          <Box component="form" noValidate autoComplete="off" sx={{ bgcolor: '#ffffff', p: 3, borderRadius: 2, boxShadow: 2 }}>
-            <Typography variant="h6" gutterBottom sx={{ color: '#1976d2' }}>
+          <Box component="form" noValidate autoComplete="off" sx={{ bgcolor: '#f0f0f0', p: 3, borderRadius: 2, boxShadow: 3 }}>
+            <Typography variant="h6" gutterBottom>
               Loan Details
             </Typography>
-            <TextField
-              label="Loan Amount"
-              type="number"
-              fullWidth
-              value={loanAmount}
-              onChange={(e) => setLoanAmount(Number(e.target.value))}
-              sx={{ mb: 2 }}
-            />
-            <TextField
-              label="Interest Rate (%)"
-              type="number"
-              fullWidth
-              value={interestRate}
-              onChange={(e) => setInterestRate(Number(e.target.value))}
-              sx={{ mb: 2 }}
-            />
-            <TextField
-              label="Loan Term (months)"
-              type="number"
-              fullWidth
-              value={loanTerm}
-              onChange={(e) => setLoanTerm(Number(e.target.value))}
-              sx={{ mb: 2 }}
-            />
-            <TextField
-              label="Start Date"
-              type="date"
-              fullWidth
-              value={startDate}
-              onChange={(e) => setStartDate(e.target.value)}
-              sx={{ mb: 2 }}
-            />
+            <TextField label="Loan Amount" type="number" fullWidth value={loanAmount} onChange={(e) => setLoanAmount(Number(e.target.value))} sx={{ mb: 2 }} />
+            <TextField label="Interest Rate (%)" type="number" fullWidth value={interestRate} onChange={(e) => setInterestRate(Number(e.target.value))} sx={{ mb: 2 }} />
+            <TextField label="Loan Term (months)" type="number" fullWidth value={loanTerm} onChange={(e) => setLoanTerm(Number(e.target.value))} sx={{ mb: 2 }} />
+            <TextField label="Start Date" type="date" fullWidth value={startDate} onChange={(e) => setStartDate(e.target.value)} sx={{ mb: 2 }} />
           </Box>
         </Grid>
 
-        {/* Loan Estimate Section */}
         <Grid item xs={12} md={8}>
-          <Box sx={{ p: 3, bgcolor: '#ffffff', borderRadius: 2, boxShadow: 2 }}>
-            <Typography variant="h6" gutterBottom sx={{ color: '#1976d2' }}>
-              Your Loan Estimate
+          <Box sx={{ p: 3, bgcolor: '#fff', borderRadius: 2, boxShadow: 3 }}>
+            <Typography variant="h6" gutterBottom>
+              Loan Estimate
             </Typography>
             {monthlyPayment !== null && (
-              <Typography variant="h4" color="green" sx={{ mb: 2, fontWeight: 'bold' }}>
+              <Typography variant="h4" color="primary" sx={{ mb: 2 }}>
                 Monthly Payment: ${monthlyPayment.toFixed(2)}
               </Typography>
             )}
             {loanSummary && (
-              <Box sx={{ mb: 3 }}>
-                <Typography variant="body1" color="textSecondary">Total Principal: ${loanSummary.totalPrincipal.toFixed(2)}</Typography>
-                <Typography variant="body1" color="textSecondary">Total Interest Payments: ${loanSummary.totalInterest.toFixed(2)}</Typography>
-                <Typography variant="body1" color="textSecondary">Total Loan Payments: ${loanSummary.totalPayment.toFixed(2)}</Typography>
-                <Typography variant="body1" color="textSecondary">Payoff Date: {loanSummary.payoffDate}</Typography>
+              <Box>
+                <Typography>Total Principal: ${loanSummary.totalPrincipal.toFixed(2)}</Typography>
+                <Typography>Total Interest: ${loanSummary.totalInterest.toFixed(2)}</Typography>
+                <Typography>Total Payment: ${loanSummary.totalPayment.toFixed(2)}</Typography>
+                <Typography>Payoff Date: {loanSummary.payoffDate}</Typography>
               </Box>
             )}
 
-            {/* Amortization Schedule Table */}
             {amortizationSchedule.length > 0 && (
               <Box sx={{ mt: 4 }}>
                 <Typography variant="h6" gutterBottom>
@@ -118,13 +82,13 @@ export default function LoanCalculatorForm() {
                 </Typography>
                 <TableContainer component={Paper}>
                   <Table>
-                    <TableHead sx={{ bgcolor: '#1976d2' }}>
+                    <TableHead>
                       <TableRow>
-                        <TableCell sx={{ color: '#fff', fontWeight: 'bold' }}>Payment Date</TableCell>
-                        <TableCell sx={{ color: '#fff', fontWeight: 'bold' }}>Principal</TableCell>
-                        <TableCell sx={{ color: '#fff', fontWeight: 'bold' }}>Interest</TableCell>
-                        <TableCell sx={{ color: '#fff', fontWeight: 'bold' }}>Monthly Total</TableCell>
-                        <TableCell sx={{ color: '#fff', fontWeight: 'bold' }}>Balance</TableCell>
+                        <TableCell>Payment Date</TableCell>
+                        <TableCell>Principal</TableCell>
+                        <TableCell>Interest</TableCell>
+                        <TableCell>Monthly Total</TableCell>
+                        <TableCell>Balance</TableCell>
                       </TableRow>
                     </TableHead>
                     <TableBody>
