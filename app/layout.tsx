@@ -1,16 +1,20 @@
-// app/layout.tsx
 import React from 'react';
-import './globals.css';
-
-export const metadata = {
-  title: 'Personal Loan Calculator',
-  description: 'A simple personal loan calculator using Next.js and Material-UI',
-};
+import { CssBaseline, Container } from '@mui/material';
+import '../src/styles/globals.css';
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <head>
+        <title>Personal Loan Calculator</title>
+        <link rel="icon" href="/favicon.ico" />
+      </head>
+      <body>
+        <CssBaseline />
+        <Container maxWidth="md">
+          {children}
+        </Container>
+      </body>
     </html>
   );
 }
