@@ -1,8 +1,7 @@
-// app/page.tsx
 'use client';
 
 import React, { useState } from 'react';
-import { TextField, Button, Typography, Container, Box } from '@mui/material';
+import { TextField, Typography, Container, Box } from '@mui/material';
 
 export default function LoanCalculator() {
   const [loanAmount, setLoanAmount] = useState(10000);
@@ -26,21 +25,37 @@ export default function LoanCalculator() {
           label="Loan Amount"
           type="number"
           value={loanAmount}
-          onChange={(e) => setLoanAmount(Number(e.target.value))}
+          onChange={(e) => {
+            const value = Number(e.target.value);
+            setLoanAmount(value);
+            calculateMonthlyPayment();
+          }}
         />
         <TextField
           label="Interest Rate (%)"
           type="number"
           value={interestRate}
-          onChange={(e) => setInterestRate(Number(e.target.value))}
+          onChange={(e) => {
+            const value = Number(e.target.value);
+            setInterestRate(value);
+            calculateMonthlyPayment();
+          }}
         />
         <TextField
           label="Loan Term (months)"
           type="number"
           value={loanTerm}
-          onChange={(e) => setLoanTerm(Number(e.target.value))}
+          onChange={(e) => {
+            const value = Number(e.target.value);
+            setLoanTerm(value);
+            calculateMonthlyPayment();
+          }}
         />
-        
+        {monthlyPayment !== null && (
+          <Typography variant="h6" sx={{ mt: 2 }}>
+            Monthly Payment: ${monthlyPayment.toFixed(2)}
+          </Typography>
+        )}
       </Box>
     </Container>
   );
